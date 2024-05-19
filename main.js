@@ -1,3 +1,5 @@
+import Buildings from './coords.js'
+
 // Load the SVG container and base map image
 const width = 1076
 const height = 1144
@@ -99,3 +101,5 @@ function visualizeData(data, color) {
 		.attr('fill', color)
 		.style('fill-opacity', 0.1)
 }
+
+Buildings()
