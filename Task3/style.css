@@ -11,20 +11,6 @@ body {
 	overflow: scroll;
 }
 
-path {
-	/* fill: #ccc; */
-	/* stroke: #fff; */
-	/* stroke-width: 0.5px; */
-}
-
-path:hover {
-	/* fill: red; */
-}
-
-.toposvg {
-	/* transform: rotate(180deg) scaleX(-1); */
-}
-
 #timeline {
 	/* display: flex;
 	flex-direction: column;

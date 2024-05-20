@@ -9,7 +9,7 @@ const height = 1144
 const svg = Buildings()
 
 // Load and visualize the first dataset
-d3.csv('Datasets/Cleaned/ParticipantStatusLogs0.csv')
+d3.csv('../Datasets/Cleaned/ParticipantStatusLogs0.csv')
 	.then(function (data0) {
 		visualizeData(data0, 'slateblue')
 		Timeline(data0, 1)
@@ -19,9 +19,9 @@ d3.csv('Datasets/Cleaned/ParticipantStatusLogs0.csv')
 	})
 
 // Load and visualize the second dataset
-d3.csv('Datasets/Cleaned/ParticipantStatusLogs1.csv')
+d3.csv('../Datasets/Cleaned/ParticipantStatusLogs1.csv')
 	.then(function (data1) {
-		visualizeData(data1, 'mediumorchid')
+		visualizeData(data1, 'tomato')
 		Timeline(data1, 2)
 	})
 	.catch(function (error) {

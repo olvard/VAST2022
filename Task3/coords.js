@@ -9,7 +9,7 @@ export default function Buildings() {
 
 	var svg = d3.select('body').append('svg').attr('width', width).attr('height', height).classed('toposvg', true)
 
-	var url = 'Datasets/Cleaned/buildings.json'
+	var url = '../Datasets/Cleaned/buildings.json'
 
 	d3.json(url).then(function (topology) {
 		console.log('topojson', topology)
@@ -39,7 +39,7 @@ export default function Buildings() {
 			{ label: 'Commercial', color: 'wheat' },
 			{ label: 'School', color: 'lightgrey' },
 			{ label: 'Participant 1', color: 'slateblue' },
-			{ label: 'Participant 2', color: 'mediumorchid' },
+			{ label: 'Participant 2', color: 'tomato' },
 		]
 
 		var legendItem = legend
