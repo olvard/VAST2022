@@ -1,4 +1,5 @@
 import Buildings from './coords.js'
+import Timeline from './timeline.js'
 
 // Load the SVG container and base map image
 const width = 1076
@@ -11,6 +12,7 @@ const svg = Buildings()
 d3.csv('Datasets/Cleaned/ParticipantStatusLogs0.csv')
 	.then(function (data0) {
 		visualizeData(data0, 'slateblue')
+		Timeline(data0, 1)
 	})
 	.catch(function (error) {
 		console.error('Error loading the first data: ', error)
@@ -20,6 +22,7 @@ d3.csv('Datasets/Cleaned/ParticipantStatusLogs0.csv')
 d3.csv('Datasets/Cleaned/ParticipantStatusLogs1.csv')
 	.then(function (data1) {
 		visualizeData(data1, 'mediumorchid')
+		Timeline(data1, 2)
 	})
 	.catch(function (error) {
 		console.error('Error loading the second data: ', error)
@@ -29,7 +32,7 @@ d3.csv('Datasets/Cleaned/ParticipantStatusLogs1.csv')
 function visualizeData(data, color) {
 	// Parse the POINT objects and extract x and y coordinates
 	data.forEach(function (d) {
-		var coordinates = d.currentLocation.match(/-?\d+\.\d+/g) // Extract numerical values
+		var coordinates = d.currentLocation.match(/-?\d+\.\d+/g)
 		d.x = parseFloat(coordinates[0]) // Extract x coordinate
 		d.y = parseFloat(coordinates[1]) // Extract y coordinate
 	})
@@ -65,30 +68,27 @@ function visualizeData(data, color) {
 		.scale(scale)
 		.translate(translate)
 
-	// Draw lines between data points
-	svg.selectAll(`.${color}.line`)
-		.data(data)
-		.enter()
-		.append('line')
-		.attr('x1', function (d) {
+	// Define the line generator with a smoothing curve
+	var lineGenerator = d3
+		.line()
+		.x(function (d) {
 			return projection([d.x, d.y])[0]
 		})
-		.attr('y1', function (d) {
+		.y(function (d) {
 			return projection([d.x, d.y])[1]
 		})
-		.attr('x2', function (d, i, nodes) {
-			if (i < nodes.length - 1) {
-				return projection([data[i + 1].x, data[i + 1].y])[0]
-			}
-		})
-		.attr('y2', function (d, i, nodes) {
-			if (i < nodes.length - 1) {
-				return projection([data[i + 1].x, data[i + 1].y])[1]
-			}
-		})
+		.curve(d3.curveBumpX)
+
+	// Join the data and create the path
+	svg.selectAll(`.${color}.line`)
+		.data([data])
+		.enter()
+		.append('path')
+		.attr('d', lineGenerator)
 		.attr('stroke', color)
-		.attr('stroke-width', 1)
-		.style('stroke-opacity', 0.2)
+		.attr('stroke-width', 1.5)
+		.style('stroke-opacity', 0.5)
+		.attr('fill', 'none')
 
 	// Draw points
 	svg.selectAll(`.${color}.circle`)
@@ -102,3 +102,45 @@ function visualizeData(data, color) {
 		.attr('fill', color)
 		.style('fill-opacity', 0.1)
 }
+
+var legendData = [
+	{ label: 'Work', color: 'slategray' },
+	{ label: 'Home', color: 'lightblue' },
+	{ label: 'Restaurant', color: 'springgreen' },
+	{ label: 'Transport', color: 'deeppink' },
+	{ label: 'Reacreation', color: 'pink' },
+]
+
+var legend = d3
+	.select('#timelineLegend')
+	.append('svg')
+	.attr('width', 800)
+	.attr('height', 50)
+	.append('g')
+	.attr('class', 'legend')
+
+var legendItem = legend
+	.selectAll('.legend-item')
+	.data(legendData)
+	.enter()
+	.append('g')
+	.attr('class', 'legend-item')
+	.attr('transform', function (d, i) {
+		return 'translate(' + i * 150 + ', 20)'
+	})
+
+legendItem
+	.append('rect')
+	.attr('width', 10)
+	.attr('height', 10)
+	.attr('fill', function (d) {
+		return d.color
+	})
+
+legendItem
+	.append('text')
+	.attr('x', 20)
+	.attr('y', 10)
+	.text(function (d) {
+		return d.label
+	})
