@@ -10,7 +10,7 @@ const svg = Buildings()
 // Load and visualize the first dataset
 d3.csv('Datasets/Cleaned/ParticipantStatusLogs0.csv')
 	.then(function (data0) {
-		visualizeData(data0, 'red')
+		visualizeData(data0, 'slateblue')
 	})
 	.catch(function (error) {
 		console.error('Error loading the first data: ', error)
@@ -19,7 +19,7 @@ d3.csv('Datasets/Cleaned/ParticipantStatusLogs0.csv')
 // Load and visualize the second dataset
 d3.csv('Datasets/Cleaned/ParticipantStatusLogs1.csv')
 	.then(function (data1) {
-		visualizeData(data1, 'blue')
+		visualizeData(data1, 'mediumorchid')
 	})
 	.catch(function (error) {
 		console.error('Error loading the second data: ', error)
@@ -87,15 +87,15 @@ function visualizeData(data, color) {
 			}
 		})
 		.attr('stroke', color)
-		.attr('stroke-width', 2)
-		.style('stroke-opacity', 0.1)
+		.attr('stroke-width', 1)
+		.style('stroke-opacity', 0.2)
 
 	// Draw points
 	svg.selectAll(`.${color}.circle`)
 		.data(data)
 		.enter()
 		.append('circle')
-		.attr('r', 2)
+		.attr('r', 3)
 		.attr('transform', function (d) {
 			return 'translate(' + projection([d.x, d.y]) + ')'
 		})
