@@ -3,8 +3,9 @@ import Buildings from './coords.js'
 // Load the SVG container and base map image
 const width = 1076
 const height = 1144
-const svg = d3.select('body').append('svg').attr('width', width).attr('height', height)
-svg.append('image').attr('xlink:href', 'BaseMap.png').attr('width', width).attr('height', height)
+// const svg = d3.select('body').append('svg').attr('width', width).attr('height', height)
+// svg.append('image').attr('xlink:href', 'BaseMap.png').attr('width', width).attr('height', height)
+const svg = Buildings()
 
 // Load and visualize the first dataset
 d3.csv('Datasets/Cleaned/ParticipantStatusLogs0.csv')
@@ -101,5 +102,3 @@ function visualizeData(data, color) {
 		.attr('fill', color)
 		.style('fill-opacity', 0.1)
 }
-
-Buildings()

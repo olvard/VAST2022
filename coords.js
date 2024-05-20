@@ -7,7 +7,7 @@ export default function Buildings() {
 
 	var path = d3.geoPath()
 
-	var svg = d3.select('body').append('svg').attr('width', width).attr('height', height)
+	var svg = d3.select('body').append('svg').attr('width', width).attr('height', height).classed('toposvg', true)
 
 	var url = 'Datasets/Cleaned/buildings.json'
 
@@ -16,9 +16,11 @@ export default function Buildings() {
 		var geojson = topojson.feature(topology, topology.objects.buildings)
 		console.log('geojson', geojson)
 
-		var projection = d3.geoIdentity().fitSize([width, height], geojson).reflectY(false)
+		var projection = d3.geoIdentity().reflectY(true).fitSize([width, height], geojson)
 		path.projection(projection)
 
 		svg.selectAll('path').data(geojson.features).enter().append('path').attr('d', path)
 	})
+
+	return svg
 }

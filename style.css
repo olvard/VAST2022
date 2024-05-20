@@ -11,24 +11,6 @@ body {
 	overflow: scroll;
 }
 
-#control {
-	position: fixed;
-	bottom: 60px;
-	left: 10%;
-	z-index: 1000;
-	width: 200px;
-	background-color: lightgray;
-	border-radius: 10px;
-	padding-left: 50px;
-	padding-right: 50px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#slider {
-	width: 90%;
-}
-
 path {
 	fill: #ccc;
 	stroke: #fff;
@@ -37,4 +19,8 @@ path {
 
 path:hover {
 	fill: red;
+}
+
+.toposvg {
+	/* transform: rotate(180deg) scaleX(-1); */
 }
