@@ -1,6 +1,6 @@
 ### VAST 2022 Solutions
 
-For the course Advanced Visual Datanalysis, we worked on a 2022 VAST challenge about daily routines in a fictional city. 
+For the course Advanced Visual Datanalysis(TNM098), we worked on a 2022 VAST challenge about daily routines in a fictional city. 
 
 The challenge is described:
 
