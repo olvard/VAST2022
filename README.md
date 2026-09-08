@@ -1,6 +1,6 @@
 ### VAST 2022 Solutions
 
-For the course Advanced Visual Datanalysis(TNM098), we worked on a 2022 VAST challenge about daily routines in a fictional city. 
+For the course Advanced Visual Datanalysis, we worked on a 2022 VAST challenge about daily routines in a fictional city. 
 
 The challenge is described:
 
@@ -19,3 +19,5 @@ The project was carried out using python with jupyter notebook along with a sele
 
 ### Bottlenecks
 <img width="680" alt="bottlenecks" src="https://github.com/user-attachments/assets/5b9c33fd-b668-4aee-b48e-b0ab21b73539">
+
+TNM098
